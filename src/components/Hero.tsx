@@ -5,23 +5,28 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Play, Music } from "lucide-react"
 
-const images = [
-  "https://picsum.photos/seed/hero1/1920/1080",
-  "https://picsum.photos/seed/hero2/1920/1080",
-  "https://picsum.photos/seed/hero3/1920/1080",
-  "https://picsum.photos/seed/hero4/1920/1080",
-  "https://picsum.photos/seed/hero5/1920/1080",
-]
-
 export default function Hero() {
+  const [images, setImages] = useState<string[]>([])
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
+    fetch("/api/data/gallery")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setImages(data.map((img: { image_url: string }) => img.image_url))
+        }
+      })
+      .catch(() => {})
+  }, [])
+
+  useEffect(() => {
+    if (images.length < 2) return
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length)
     }, 5000)
     return () => clearInterval(interval)
-  }, [])
+  }, [images.length])
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
@@ -34,6 +39,9 @@ export default function Hero() {
           style={{ backgroundImage: `url(${src})` }}
         />
       ))}
+      {images.length === 0 && (
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-background" />
+      )}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-background/80 to-background" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
       <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6">

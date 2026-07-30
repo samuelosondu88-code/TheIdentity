@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Plus, Pencil, Trash2, Users } from "lucide-react"
+import ImageUpload from "@/components/ImageUpload"
 import type { Member } from "@/types/database"
 
 export default function AdminMembersPage() {
@@ -86,8 +87,8 @@ export default function AdminMembersPage() {
               <Textarea id="bio" name="bio" defaultValue={editing?.bio} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="image_url">Photo URL</Label>
-              <Input id="image_url" name="image_url" defaultValue={editing?.image_url} />
+              <Label>Photo</Label>
+              <ImageUpload name="image_url" defaultValue={editing?.image_url} folder="member_photos" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="social_links">Social Links (JSON)</Label>

@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Plus, Pencil, Trash2, Music } from "lucide-react"
+import ImageUpload from "@/components/ImageUpload"
 import type { MusicRelease } from "@/types/database"
 
 export default function AdminMusicPage() {
@@ -87,8 +88,8 @@ export default function AdminMusicPage() {
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="cover_image_url">Cover Image URL</Label>
-                <Input id="cover_image_url" name="cover_image_url" defaultValue={editing?.cover_image_url} />
+                <Label>Cover Image</Label>
+                <ImageUpload name="cover_image_url" defaultValue={editing?.cover_image_url} folder="music_covers" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="release_date">Release Date</Label>

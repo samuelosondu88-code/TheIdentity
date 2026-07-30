@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Plus, Pencil, Trash2, Newspaper } from "lucide-react"
+import ImageUpload from "@/components/ImageUpload"
 import type { NewsArticle } from "@/types/database"
 
 export default function AdminNewsPage() {
@@ -77,8 +78,8 @@ export default function AdminNewsPage() {
               <Textarea id="content" name="content" rows={10} defaultValue={editing?.content} required />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="featured_image_url">Featured Image URL</Label>
-              <Input id="featured_image_url" name="featured_image_url" defaultValue={editing?.featured_image_url} />
+              <Label>Featured Image</Label>
+              <ImageUpload name="featured_image_url" defaultValue={editing?.featured_image_url} folder="news_images" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="status">Status</Label>

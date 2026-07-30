@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Plus, Trash2, ImageIcon } from "lucide-react"
+import ImageUpload from "@/components/ImageUpload"
 import type { GalleryImage } from "@/types/database"
 
 export default function AdminGalleryPage() {
@@ -55,8 +56,8 @@ export default function AdminGalleryPage() {
         <div className="mb-8 rounded-xl border border-border bg-card p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="image_url">Image URL</Label>
-              <Input id="image_url" name="image_url" required />
+              <Label>Image</Label>
+              <ImageUpload name="image_url" folder="gallery" />
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
@@ -91,9 +92,7 @@ export default function AdminGalleryPage() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {images.map((image) => (
             <div key={image.id} className="group relative aspect-square overflow-hidden rounded-xl border border-border bg-card">
-              <div className="flex h-full items-center justify-center bg-muted">
-                <ImageIcon className="h-12 w-12 text-muted-foreground/30" />
-              </div>
+              <img src={image.image_url} alt={image.title || "Gallery"} className="h-full w-full object-cover" />
               <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 p-3 opacity-0 transition-opacity group-hover:opacity-100">
                 <div className="flex w-full items-center justify-between">
                   <div className="min-w-0 flex-1">
