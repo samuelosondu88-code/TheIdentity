@@ -1,8 +1,9 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { Upload, X, Loader2 } from "lucide-react"
+import { X, Loader2 } from "lucide-react"
 import { uploadFile } from "@/lib/firebase/storage"
+import { compressImage } from "@/lib/compress"
 
 interface ImageUploadProps {
   name: string
@@ -20,11 +21,12 @@ export default function ImageUpload({ name, defaultValue, folder = "uploads" }: 
     const file = e.target.files?.[0]
     if (!file) return
     setUploading(true)
-    const localUrl = URL.createObjectURL(file)
-    setPreview(localUrl)
     try {
+      const compressed = await compressImage(file)
+      const localUrl = URL.createObjectURL(compressed)
+      setPreview(localUrl)
       const path = `${folder}/${Date.now()}-${file.name}`
-      const downloadUrl = await uploadFile(path, file)
+      const downloadUrl = await uploadFile(path, compressed)
       setUrl(downloadUrl)
       setPreview(downloadUrl)
     } catch (err) {
