@@ -13,6 +13,7 @@ const navLinks = [
   { href: "/music", label: "Music" },
   { href: "/members", label: "Members" },
   { href: "/gallery", label: "Gallery" },
+  { href: "/videos", label: "Videos" },
   { href: "/events", label: "Events" },
   { href: "/news", label: "News" },
   { href: "/contact", label: "Contact" },

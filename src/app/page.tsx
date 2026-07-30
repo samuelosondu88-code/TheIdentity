@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import Link from "next/link"
 import { ArrowRight, Music, Users, Calendar } from "lucide-react"
+import VideoCard from "@/components/VideoCard"
 import { listDocuments, Query } from "@/lib/firebase/db"
-import type { MusicRelease, Event, Member, GalleryImage } from "@/types/database"
+import type { MusicRelease, Event, Member, GalleryImage, Video } from "@/types/database"
 
 async function getFeaturedRelease() {
   const releases = await listDocuments<MusicRelease>("music_releases", [Query.equal("featured", true), Query.limit(1)])
@@ -26,13 +27,18 @@ async function getRecentGallery() {
   return listDocuments<GalleryImage>("gallery", [Query.orderDesc("created_at"), Query.limit(4)])
 }
 
+async function getRecentVideos() {
+  return listDocuments<Video>("videos", [Query.orderDesc("created_at"), Query.limit(3)])
+}
+
 export default async function HomePage() {
-  const [featuredRelease, upcomingEvent, members, galleryImages] =
+  const [featuredRelease, upcomingEvent, members, galleryImages, recentVideos] =
     await Promise.all([
       getFeaturedRelease(),
       getUpcomingEvent(),
       getFeaturedMembers(),
       getRecentGallery(),
+      getRecentVideos(),
     ])
 
   return (
@@ -194,6 +200,29 @@ export default async function HomePage() {
                     <Music className="h-10 w-10 text-muted-foreground/30" />
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {recentVideos.length > 0 && (
+        <section className="border-t border-border/50 py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-10 flex items-center justify-between">
+              <div>
+                <h2 className="text-3xl font-bold">Latest Videos</h2>
+                <p className="mt-2 text-muted-foreground">Watch our latest videos</p>
+              </div>
+              <Link href="/videos">
+                <Button variant="outline">
+                  All Videos <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {recentVideos.map((video) => (
+                <VideoCard key={video.id} title={video.title} video_url={video.video_url} description={video.description} />
               ))}
             </div>
           </div>
