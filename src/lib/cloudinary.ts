@@ -1,5 +1,5 @@
 const CLOUD_NAME = "identity"
-const UPLOAD_PRESET = "ml_default"
+const UPLOAD_PRESET = "identity"
 
 export async function uploadToCloudinary(file: File, resourceType: "image" | "video" = "image") {
   const formData = new FormData()
