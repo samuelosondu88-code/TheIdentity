@@ -76,6 +76,16 @@ export interface SocialLink {
   active: boolean
 }
 
+export interface Video {
+  id: string
+  title: string
+  description: string
+  video_url: string
+  thumbnail_url: string
+  category: string
+  created_at: string
+}
+
 export interface ContactMessage {
   id: string
   name: string

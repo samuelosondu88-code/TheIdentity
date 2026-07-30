@@ -14,6 +14,7 @@ import {
   Newspaper,
   Share2,
   MessageSquare,
+  Video,
   LogOut,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -24,6 +25,7 @@ const sidebarLinks = [
   { href: "/admin/members", icon: Users, label: "Members" },
   { href: "/admin/events", icon: Calendar, label: "Events" },
   { href: "/admin/gallery", icon: ImageIcon, label: "Gallery" },
+  { href: "/admin/videos", icon: Video, label: "Videos" },
   { href: "/admin/news", icon: Newspaper, label: "News" },
   { href: "/admin/social", icon: Share2, label: "Social Media" },
   { href: "/admin/messages", icon: MessageSquare, label: "Messages" },

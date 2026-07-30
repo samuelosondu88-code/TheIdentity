@@ -19,6 +19,7 @@ export const collections = {
   social_links: "social_links",
   contact_messages: "contact_messages",
   admin_profiles: "admin_profiles",
+  videos: "videos",
 } as const
 
 export type CollectionName = keyof typeof collections
