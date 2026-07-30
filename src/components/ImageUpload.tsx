@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react"
 import { X, Loader2, AlertCircle } from "lucide-react"
-import { uploadFile } from "@/lib/firebase/storage"
+import { uploadToCloudinary } from "@/lib/cloudinary"
 
 interface ImageUploadProps {
   name: string
@@ -10,7 +10,7 @@ interface ImageUploadProps {
   folder?: string
 }
 
-export default function ImageUpload({ name, defaultValue, folder = "uploads" }: ImageUploadProps) {
+export default function ImageUpload({ name, defaultValue }: ImageUploadProps) {
   const [url, setUrl] = useState(defaultValue || "")
   const [uploading, setUploading] = useState(false)
   const [preview, setPreview] = useState(defaultValue || "")
@@ -25,16 +25,13 @@ export default function ImageUpload({ name, defaultValue, folder = "uploads" }: 
     try {
       const localUrl = URL.createObjectURL(file)
       setPreview(localUrl)
-      const path = `${folder}/${Date.now()}-${file.name}`
-      console.log("Uploading to:", path)
-      const downloadUrl = await uploadFile(path, file)
-      console.log("Upload success:", downloadUrl)
+      const downloadUrl = await uploadToCloudinary(file, "image")
       setUrl(downloadUrl)
       setPreview(downloadUrl)
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Upload failed"
       setError(msg)
-      console.error("Upload error:", err)
+      setPreview("")
     }
     setUploading(false)
   }

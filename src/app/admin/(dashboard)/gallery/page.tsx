@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Plus, Trash2, ImageIcon, Upload, Loader2, CheckCircle2, XCircle } from "lucide-react"
-import { uploadFile } from "@/lib/firebase/storage"
+import { uploadToCloudinary } from "@/lib/cloudinary"
 import type { GalleryImage } from "@/types/database"
 
 export default function AdminGalleryPage() {
@@ -39,8 +39,7 @@ export default function AdminGalleryPage() {
     for (let i = 0; i < files.length; i++) {
       const file = files[i]
       try {
-        const path = `gallery/${Date.now()}-${file.name}`
-        const url = await uploadFile(path, file)
+        const url = await uploadToCloudinary(file, "image")
         setUploads((prev) => prev.map((u, j) => j === i ? { ...u, progress: 100, status: "done" } : u))
         await fetch("/api/data/gallery", {
           method: "POST",

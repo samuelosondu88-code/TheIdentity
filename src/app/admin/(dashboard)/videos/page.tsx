@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Trash2, VideoIcon, Upload, Loader2, CheckCircle2, XCircle, Plus } from "lucide-react"
-import { uploadFile } from "@/lib/firebase/storage"
+import { uploadToCloudinary } from "@/lib/cloudinary"
 import type { Video } from "@/types/database"
 
 export default function AdminVideosPage() {
@@ -41,8 +41,7 @@ export default function AdminVideosPage() {
     for (let i = 0; i < files.length; i++) {
       const file = files[i]
       try {
-        const path = `videos/${Date.now()}-${file.name}`
-        const url = await uploadFile(path, file)
+        const url = await uploadToCloudinary(file, "video")
         setUploads((prev) => prev.map((u, j) => j === i ? { ...u, progress: 100, status: "done" } : u))
         await fetch("/api/data/videos", {
           method: "POST",
