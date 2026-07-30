@@ -1,4 +1,4 @@
-const CLOUD_NAME = "identity"
+const CLOUD_NAME = "wbcmfcnt"
 const UPLOAD_PRESET = "identity"
 
 export async function uploadToCloudinary(file: File, resourceType: "image" | "video" = "image") {
