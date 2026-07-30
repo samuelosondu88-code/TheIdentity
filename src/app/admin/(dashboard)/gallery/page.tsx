@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Plus, Trash2, ImageIcon, Upload, Loader2, CheckCircle2, XCircle } from "lucide-react"
 import { uploadFile } from "@/lib/firebase/storage"
-import { compressImage } from "@/lib/compress"
 import type { GalleryImage } from "@/types/database"
 
 export default function AdminGalleryPage() {
@@ -40,17 +39,18 @@ export default function AdminGalleryPage() {
     for (let i = 0; i < files.length; i++) {
       const file = files[i]
       try {
-        const compressed = await compressImage(file)
         const path = `gallery/${Date.now()}-${file.name}`
-        const url = await uploadFile(path, compressed)
+        const url = await uploadFile(path, file)
         setUploads((prev) => prev.map((u, j) => j === i ? { ...u, progress: 100, status: "done" } : u))
         await fetch("/api/data/gallery", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ image_url: url, title: file.name.replace(/\.[^/.]+$/, ""), caption: "", category: "" }),
         })
-      } catch {
+      } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : "Upload failed"
         setUploads((prev) => prev.map((u, j) => j === i ? { ...u, status: "error" } : u))
+        console.error(`Upload failed for ${file.name}:`, msg)
       }
     }
 
