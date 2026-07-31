@@ -18,6 +18,11 @@ export default function EventCard({ event, past }: EventCardProps) {
       }`}
     >
       <CardContent className="flex flex-col gap-4 p-6 sm:flex-row sm:items-start">
+        {event.image_url && (
+          <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border border-border bg-muted">
+            <img src={event.image_url} alt={event.title} className="h-full w-full object-cover" />
+          </div>
+        )}
         <div className="flex-shrink-0 text-center">
           <div className="flex h-20 w-20 flex-col items-center justify-center rounded-xl border border-border bg-muted">
             <span className="text-2xl font-bold text-primary">

@@ -39,6 +39,7 @@ export interface Event {
   id: string
   title: string
   description: string
+  image_url: string
   event_date: string
   event_time: string
   venue: string

@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Plus, Pencil, Trash2, Calendar } from "lucide-react"
+import ImageUpload from "@/components/ImageUpload"
 import type { Event } from "@/types/database"
 
 export default function AdminEventsPage() {
@@ -37,6 +38,7 @@ export default function AdminEventsPage() {
     const data = {
       title: formData.get("title") as string,
       description: formData.get("description") as string,
+      image_url: formData.get("image_url") as string,
       event_date: formData.get("event_date") as string,
       event_time: formData.get("event_time") as string,
       venue: formData.get("venue") as string,
@@ -76,6 +78,10 @@ export default function AdminEventsPage() {
             <div className="space-y-2">
               <Label htmlFor="description">Description</Label>
               <Textarea id="description" name="description" defaultValue={editing?.description} />
+            </div>
+            <div className="space-y-2">
+              <Label>Event Image</Label>
+              <ImageUpload name="image_url" defaultValue={editing?.image_url} folder="event_images" />
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
@@ -126,9 +132,16 @@ export default function AdminEventsPage() {
         <div className="space-y-3">
           {events.map((event) => (
             <div key={event.id} className="flex items-center justify-between rounded-xl border border-border bg-card p-4">
-              <div>
-                <h3 className="font-semibold">{event.title}</h3>
-                <p className="text-sm text-muted-foreground">{new Date(event.event_date).toLocaleDateString()}</p>
+              <div className="flex items-center gap-4">
+                {event.image_url && (
+                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg border border-border bg-muted">
+                    <img src={event.image_url} alt={event.title} className="h-full w-full object-cover" />
+                  </div>
+                )}
+                <div>
+                  <h3 className="font-semibold">{event.title}</h3>
+                  <p className="text-sm text-muted-foreground">{new Date(event.event_date).toLocaleDateString()}</p>
+                </div>
               </div>
               <div className="flex gap-2">
                 <Button variant="ghost" size="sm" onClick={() => { setEditing(event); setShowForm(true) }}>
