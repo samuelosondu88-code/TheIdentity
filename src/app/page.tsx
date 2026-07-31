@@ -228,8 +228,8 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold">Stay Connected</h2>
           <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
-            Follow The Identity on social media for the latest music, events,
-            and behind-the-scenes content.
+            Join the movement. Follow The Identity for the latest creative
+            projects, music, events, and resources.
           </p>
           <div className="mt-8 flex justify-center gap-4">
             <Link href="/music">

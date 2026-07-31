@@ -48,7 +48,7 @@ export default function Hero() {
         <div className="animate-fade-in-up">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm text-primary">
             <Music className="h-4 w-4" />
-            Music Group
+            Kingdom-Centered Creative Hub
           </div>
           <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
             THE{" "}
@@ -57,12 +57,12 @@ export default function Hero() {
             </span>
           </h1>
           <p className="mb-2 text-xl font-semibold text-muted-foreground sm:text-2xl">
-            Music. Purpose. Identity.
+            Creativity. Calling. Christ.
           </p>
           <p className="mx-auto mb-8 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            We are a collective of musicians driven by passion, creativity, and
-            the power of sound. Discover our music, join our journey, and be
-            part of something bigger.
+            A Kingdom-centered creative hub dedicated to raising creatives who
+            understand their identity in Christ and use their gifts to influence
+            culture with excellence, truth, and purpose.
           </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link href="/music">
@@ -73,7 +73,7 @@ export default function Hero() {
             </Link>
             <Link href="/about">
               <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                Discover Our Music
+                About Us
               </Button>
             </Link>
           </div>

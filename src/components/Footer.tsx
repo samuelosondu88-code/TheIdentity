@@ -48,7 +48,8 @@ export default function Footer() {
           <div>
             <h3 className="mb-3 text-sm font-semibold">Connect</h3>
             <p className="text-sm text-muted-foreground">
-              Follow The Identity on social media for the latest updates.
+              Raising Kingdom creatives to influence culture with excellence,
+              truth, and purpose.
             </p>
           </div>
         </div>
