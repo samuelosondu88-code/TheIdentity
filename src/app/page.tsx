@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator"
 import Link from "next/link"
 import { ArrowRight, Music, Users, Calendar } from "lucide-react"
 import VideoCard from "@/components/VideoCard"
+import TicketModal from "@/components/TicketModal"
 import { listDocuments, Query } from "@/lib/firebase/db"
 import type { MusicRelease, Event, Member, GalleryImage, Video } from "@/types/database"
 
@@ -119,11 +120,7 @@ export default async function HomePage() {
                 {upcomingEvent.venue}, {upcomingEvent.location}
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                {upcomingEvent.ticket_url && (
-                  <Link href={upcomingEvent.ticket_url}>
-                    <Button>Get Tickets</Button>
-                  </Link>
-                )}
+                <TicketModal event={upcomingEvent} />
                 <Link href="/events">
                   <Button variant="outline">
                     All Events <ArrowRight className="ml-2 h-4 w-4" />

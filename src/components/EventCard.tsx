@@ -1,9 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Calendar, MapPin, Clock, ExternalLink, Ticket } from "lucide-react"
+import { Calendar, MapPin, Clock, ExternalLink } from "lucide-react"
 import type { Event } from "@/types/database"
 import { formatDate } from "@/lib/utils"
+import TicketModal from "@/components/TicketModal"
 
 interface EventCardProps {
   event: Event
@@ -57,18 +58,7 @@ export default function EventCard({ event, past }: EventCardProps) {
             {event.description}
           </p>
           <div className="flex flex-wrap gap-2">
-            {event.ticket_url && (
-              <Button variant="default" size="sm" asChild>
-                <a
-                  href={event.ticket_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Ticket className="h-4 w-4" />
-                  Get Tickets
-                </a>
-              </Button>
-            )}
+            <TicketModal event={event} />
             {event.registration_url && (
               <Button variant="outline" size="sm" asChild>
                 <a

@@ -45,6 +45,7 @@ export default function AdminEventsPage() {
       location: formData.get("location") as string,
       registration_url: formData.get("registration_url") as string,
       ticket_url: formData.get("ticket_url") as string,
+      ticket_price: formData.get("ticket_price") as string,
     }
 
     if (editing) {
@@ -109,8 +110,8 @@ export default function AdminEventsPage() {
                 <Input id="ticket_url" name="ticket_url" defaultValue={editing?.ticket_url} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="registration_url">Registration URL</Label>
-                <Input id="registration_url" name="registration_url" defaultValue={editing?.registration_url} />
+                <Label htmlFor="ticket_price">Ticket Price (NGN, 0 or empty = Free)</Label>
+                <Input id="ticket_price" name="ticket_price" type="number" min={0} defaultValue={editing?.ticket_price ?? "0"} />
               </div>
             </div>
             <div className="flex gap-2">

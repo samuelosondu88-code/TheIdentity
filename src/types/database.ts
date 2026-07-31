@@ -46,6 +46,7 @@ export interface Event {
   location: string
   registration_url: string
   ticket_url: string
+  ticket_price: string
   created_at: string
 }
 
@@ -93,5 +94,18 @@ export interface ContactMessage {
   email: string
   subject: string
   message: string
+  created_at: string
+}
+
+export interface Ticket {
+  id: string
+  event_id: string
+  event_title: string
+  name: string
+  email: string
+  phone: string
+  quantity: number
+  amount: number
+  status: "pending" | "confirmed" | "cancelled"
   created_at: string
 }
