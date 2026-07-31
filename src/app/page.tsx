@@ -72,16 +72,11 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <h2 className="text-3xl font-bold">Who We Are</h2>
+              <h2 className="text-3xl font-bold">About The Identity</h2>
               <p className="mt-4 text-muted-foreground">
-                The Identity is more than a music group -- we are a movement. A
-                collective of artists, producers, and performers united by a
-                shared vision: to create music that resonates, inspires, and
-                defines a generation.
-              </p>
-              <p className="mt-4 text-muted-foreground">
-                Our sound is a fusion of genres, our energy is electric, and our
-                purpose is clear -- to leave a mark on the world through music.
+                A Kingdom-centered creative hub dedicated to raising creatives who
+                understand their identity in Christ and use their gifts to
+                influence culture with excellence, truth, and purpose.
               </p>
               <Link href="/about">
                 <Button variant="outline" className="mt-6">
